@@ -6,7 +6,13 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "npx eslint '**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "npm run prettier:fix && npm run lint:fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "expo": "~50.0.14",
@@ -15,7 +21,34 @@
     "react-native": "0.73.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@babel/eslint-parser": "^7.24.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-config-standard-jsx": "^11.0.0",
+    "eslint-config-standard-react": "^13.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.34.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5"
   },
-  "private": true
+  "private": true,
+  "eslintConfig": {
+    "parser": "@babel/eslint-parser",
+    "extends": [
+      "standard",
+      "standard-jsx",
+      "standard-react",
+      "prettier"
+    ],
+    "rules": {
+      "no-unused-vars": "off"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": "npm run format"
+  }
 }
