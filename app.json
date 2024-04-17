@@ -2,6 +2,7 @@
   "expo": {
     "name": "Explorax-Mission",
     "slug": "Explorax-Mission",
+    "scheme": "Explorax-Mission",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,7 +25,20 @@
       }
     },
     "web": {
+      "bundler": "metro",
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-font",
+        {
+          "fonts" : [
+            "./assets/fonts/HindMadurai-Regular.ttf",
+            "./assets/fonts/HindMadurai-SemiBold.ttf.ttf"
+          ]
+        }
+      ]
+    ]
   }
 }
