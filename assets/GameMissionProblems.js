@@ -3,7 +3,7 @@ const PROBLEM_TYPES = Object.freeze({
   ANSWER_THE_QUESTION: 1,
 });
 
-const TEST_MISSION = {
+const TEST_MISSION = Object.freeze({
   title: "Jerarquía de operaciones",
   problems: [
     {
@@ -19,6 +19,6 @@ const TEST_MISSION = {
       correct_answer: "17",
     },
   ],
-};
+});
 
-export { PROBLEM_TYPES, TEST_MISSION as PROBLEMS };
+export { PROBLEM_TYPES, TEST_MISSION };
