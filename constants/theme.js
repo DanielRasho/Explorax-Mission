@@ -17,7 +17,8 @@ const Theme = Object.freeze({
   },
   fontSizes: {
     display: 40,
-    title: 20,
+    title: 24,
+    textBig: 28,
     text: 20,
     tag: 10,
     buttonBig: 40,
