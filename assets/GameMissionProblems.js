@@ -15,10 +15,10 @@ const TEST_MISSION = Object.freeze({
     },
     {
       type: PROBLEM_TYPES.SOLVE_THE_EQUATION,
-      statement: "2 + 5 x 3 = ?",
+      statement: "? + 5 x 3 = 17",
       unkownChar: "?",
-      answers: ["21", "10", "17,", "13"],
-      correct_answer: "17",
+      answers: ["21", "2", "17", "13"],
+      correct_answer: "2",
     },
   ],
 });
