@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
   navContainer: {
     position: "absolute",
     bottom: 0,
-    width: windowWidth,
-    height: windowHeight * 0.17,
+    width: "100%",
+    height: "17%",
     paddingBottom: 15,
     zIndex: 50,
     justifyContent: "center",
