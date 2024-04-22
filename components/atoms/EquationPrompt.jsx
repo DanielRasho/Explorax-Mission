@@ -10,18 +10,20 @@ export default function EquationPrompt({ prompt, variableChar }) {
   // Calculate the different chunks in which an equation is separated
   // based on the variableChar which should be rendered differently
   useEffect(() => {
+    const newChunks = [];
     const promptArray = prompt.split("");
     let chunk = "";
 
     promptArray.forEach((element) => {
       if (element === variableChar) {
-        setChunks((prevChunks) => [...prevChunks, chunk, variableChar]);
+        newChunks.push(chunk, variableChar);
         chunk = "";
       } else {
         chunk += element;
       }
     });
-    setChunks((prevChunks) => [...prevChunks, chunk]);
+    newChunks.push(chunk);
+    setChunks(newChunks);
   }, [prompt, variableChar]); // Specify dependencies here
 
   return (
