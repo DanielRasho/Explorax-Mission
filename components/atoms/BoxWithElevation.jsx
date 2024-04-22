@@ -1,12 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Theme } from "../../constants/theme";
-import PropTypes from "prop-types";
+import PropTypes, { number } from "prop-types";
 
 export default function BoxWithElevation({
   children,
   frontColor,
   edgeColor,
+  width,
+  height,
   margin,
   padding,
 }) {
@@ -16,6 +18,8 @@ export default function BoxWithElevation({
         styles.textBoxShape,
         styles.textBoxContainer,
         {
+          width,
+          height,
           margin,
           backgroundColor: edgeColor,
         },
@@ -58,6 +62,8 @@ BoxWithElevation.propTypes = {
   children: PropTypes.any,
   frontColor: PropTypes.string,
   edgeColor: PropTypes.string,
+  width: PropTypes.any,
+  height: PropTypes.any,
   padding: PropTypes.number,
   margin: PropTypes.number,
 };
@@ -65,6 +71,8 @@ BoxWithElevation.propTypes = {
 BoxWithElevation.defaultProps = {
   frontColor: Theme.colors.white,
   edgeColor: Theme.colors.grey,
+  width: undefined,
+  height: undefined,
   padding: 10,
   margin: 0,
 };
