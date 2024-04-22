@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Slot } from "expo-router";
+import React, { useState, useRef, useEffect } from "react";
+import { Slot, router } from "expo-router";
 import {
   View,
   Text,
@@ -7,10 +7,14 @@ import {
   StyleSheet,
   Image,
   Dimensions,
+  Pressable,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import BottomNavBar from "../components/molecules/BottomNavMenu";
 import GameStatusBar from "../components/molecules/GameStatusBar";
+import TransitionScreen from "../components/atoms/TransitionScreen";
+import { useStore } from "zustand";
+import { useNavigateWithTransition } from "../stores/navigate";
 
 const background = require("../assets/images/spaceBackground.png");
 const circle1 = require("../assets/images/menu/circle2.png");
@@ -21,7 +25,29 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function GameLayout() {
-  const [hello, setHello] = useState("Hello?");
+  const setNavigateWithTransition = useNavigateWithTransition(
+    (state) => state.setNavigate,
+  );
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [route, setRoute] = useState("/");
+
+  useEffect(() => {
+    setNavigateWithTransition((route) => {
+      setRoute(route);
+      startAnimation();
+    });
+  });
+
+  const startAnimation = () => {
+    setIsTransitioning(true);
+  };
+  const onScreenCover = () => {
+    router.replace(route);
+  };
+  const onTransitionComplete = () => {
+    setIsTransitioning(false);
+  };
+
   return (
     <ImageBackground
       source={background}
@@ -43,6 +69,13 @@ export default function GameLayout() {
       <BottomNavBar />
       <GameStatusBar />
       <StatusBar hidden />
+      {isTransitioning ? (
+        <TransitionScreen
+          isTransitioning={isTransitioning}
+          onScreenCover={onScreenCover}
+          onTransitionComplete={onTransitionComplete}
+        />
+      ) : null}
     </ImageBackground>
   );
 }

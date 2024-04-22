@@ -9,12 +9,14 @@ const TEST_MISSION = Object.freeze({
     {
       type: PROBLEM_TYPES.SOLVE_THE_EQUATION,
       statement: "5 + ? x 6 = 71",
+      unkownChar: "?",
       answers: ["5", "11", "10", "12"],
       correct_answer: "11",
     },
     {
       type: PROBLEM_TYPES.SOLVE_THE_EQUATION,
       statement: "2 + 5 x 3 = ?",
+      unkownChar: "?",
       answers: ["21", "10", "17,", "13"],
       correct_answer: "17",
     },
