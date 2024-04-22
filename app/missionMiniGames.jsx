@@ -5,7 +5,7 @@ import { Theme } from "../constants/theme";
 import SolveEquation from "../components/molecules/SolveEquation";
 import Separator from "../components/atoms/Separator";
 import { useNavigateWithTransition } from "../stores/navigate";
-import { useGameState } from "../stores/currentLevel";
+import { useGameState } from "../stores/gameState";
 import { PROBLEM_TYPES, TEST_MISSION } from "../assets/GameMissionProblems";
 
 const titleLine = require("../assets/images/titleLine.png");
@@ -31,11 +31,13 @@ export default function MissionMiniGames() {
   }, [currentLevel]);
 
   const onResponse = () => {
-    if (currentLevel <= numLevels) {
-      incrementLevel();
-      navigate("/missionMiniGames");
-    } else {
+    if (currentLevel === numLevels - 1) {
       navigate("/missionResults");
+    } else {
+      setTimeout(() => {
+        incrementLevel();
+      }, 1000);
+      navigate("/missionMiniGames");
     }
   };
 
