@@ -6,6 +6,8 @@ import { Theme } from "../../constants/theme";
 import SimpleButton from "../atoms/SimpleButton";
 import EquationPrompt from "../atoms/EquationPrompt";
 import Separator from "../atoms/Separator";
+import { useGameState } from "../../stores/gameState";
+import AnswerButton from "./AnswerButton";
 
 export default function SolveEquation({
   statement,
@@ -14,6 +16,21 @@ export default function SolveEquation({
   rightAnswer,
   onResponse,
 }) {
+  const incrementScore = useGameState((state) => state.incrementScore);
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [showResult, setShowResult] = useState(false);
+
+  const handleOnAnswer = (answer) => {
+    setSelectedAnswer(answer);
+    setShowResult(true);
+    if (answer === rightAnswer) {
+      incrementScore();
+    }
+    setTimeout(() => {
+      onResponse();
+    }, 2000);
+  };
+
   return (
     <>
       <BoxWithElevation>
@@ -22,7 +39,16 @@ export default function SolveEquation({
       <Separator height={40} />
       <View style={styles.answersContainer}>
         {answers.map((value, index) => {
-          return <SimpleButton key={index} text={value} {...styles.button} />;
+          return (
+            <AnswerButton
+              key={index}
+              answer={value}
+              selectedAnswer={selectedAnswer}
+              rightAnswer={rightAnswer}
+              showResult={showResult}
+              onPress={handleOnAnswer}
+            />
+          );
         })}
       </View>
     </>
@@ -33,11 +59,9 @@ const styles = StyleSheet.create({
   answersContainer: {
     flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  button: {
-    fontSize: Theme.fontSizes.textBig,
-    width: "40%",
+    justifyContent: "center",
+    width: "100%",
+    gap: 20,
   },
 });
 
