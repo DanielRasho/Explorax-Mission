@@ -12,14 +12,18 @@ import BoxWithElevation from "../components/atoms/BoxWithElevation";
 import { Theme } from "../constants/theme";
 import Separator from "../components/atoms/Separator";
 import { TEST_MISSION } from "../assets/GameMissionProblems";
+import { router } from "expo-router";
+import { useNavigateWithTransition } from "../stores/navigate";
 
 const titleLine = require("../assets/images/titleLine.png");
 const character = require("../assets/images/Chanin.png");
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-
 export default function StartMissionView() {
+  const navigate = useNavigateWithTransition((state) => state.navigate);
+  const handleStartMission = () => {
+    navigate("/missionMiniGames");
+  };
+
   return (
     <View style={styles.viewContainer}>
       <Separator height="20%" />
@@ -34,7 +38,11 @@ export default function StartMissionView() {
           {TEST_MISSION.title}
         </Text>
         <Separator height={50} />
-        <SimpleButton text="¡ACEPTO EL RETO!" {...styles.startButton} />
+        <SimpleButton
+          text="¡ACEPTO EL RETO!"
+          onPressAction={handleStartMission}
+          {...styles.startButton}
+        />
       </BoxWithElevation>
       <View style={styles.character}>
         <Image source={character} style={[styles.characterImg]} />
